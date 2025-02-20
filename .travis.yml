@@ -6,3 +6,4 @@ script:
   - echo "hello world"
   - npm install
   - make
+  - npm run web
