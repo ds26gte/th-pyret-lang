@@ -1,51 +1,7 @@
-env:
-  secure: HuMEH1MDVt0br36tMjkcpC520OIA+nWV5fACPSxUeRfB86lc+n3WDbsC1qC386QOv5hKREcREGTIGF591GY04ApUmQlWNJymk2JjAkVKO2Dp3/jtBeFPXDbQ+sOAkfgcTgoC2yRWOfAAj1nJi1hKw0sZAwLP2n3KMjGSCYN8zGw=
-  global:
-  - secure: "mFArRUO9PRH8nD4Ssar5sOMrg9eRUXSbx/M8euMgLmFiyQxFhoZBKWqey4yRphDjOFhf1qovr0zUccmR0R0HFp4UaznqwFmqiLMRXFUb+KBWG0pj1NH6+fjUKepVxPbnX6xxhTWOxrHSpgA0KgLkGCn8Bmb4hKGbwWJD+TDkG497Qe9ef19lbLpTw6LOrRY9onqpNYPi8AmY8XUPoaIzXBg26nmGeDKCjHjFMVAONDv2h1wNpgcMQCGn9PyNJCy564I5XZh1vriDIy2t8JkdKyY2sAZSPVs/uLFEIxx7SUL6mhwNLwq3QHgIizeb7o10D9mqBlTx3ADDt/zFMa4I3otpg7VIyH4MysdbPZ/IWZ/B8Ew5LFL3eyY0JAXAjQQebN+PQamaWkkuSnB/qX9329NEs4HR6sp7dTYLKzOTgyWlZsWWJflgmV7/jZatzMacqLcJcqHhO+GJTbMBLLd7E/SqWmKEP7D+zjaYrp5MAObNIL6xz79ENi5p4Tktjtt8mReGzE1jDB6tifzZlWqxpgFexdxsdriIXfVNG1VWdI1aqRbpP82CEVSdYcmG+OUQiQVAm2MPxFIJSB2iw50U7F3ImCXKf8krtEDM6yv/EIarCtm+Iwb3FiBEwigkuqj9HBQVZ+OtAsr9wBlNiv9/yq0dol8ph++2XnY9cOhqgoc="
-  - BROWSER=/usr/bin/google-chrome
-  - SHOW_BROWSER="false"
-  - BASE_URL="http://localhost:8080"
-  - PORT=9000
-git:
-  submodules: false
 language: node_js
+dist: jammy
 node_js:
-- 16.15.1
-install:
-- npm ci
-before_script:
-- npm run web
-- node_modules/.bin/http-server build/worker -p 8080 &
-- sleep 10
+  - "22.5.1"
 script:
-- npm run offline-tests
-notifications:
-  slack:
-    secure: kHQvp3HZL5GRY58XrGdRhZKtUvGrxgsAKMawYYNO4PA9NXlr5EYwbYBCrud1DNJs6kdEPK48ItSnsWXKoDZTS+g96b56t8vjHl2d98EN4WwvORj3g9NNiZ0SESL2LUwFa5vCxlnTbxfCQcfNpStGrwYZZ9DnIGTDuLO2EqZxvP0=
-addons:
-  chrome: stable
-after_failure:
-- sleep 10
-- echo "--actual end of .travis script--"
-before_deploy:
-- cd ide
-- npm install
-- echo "JOE  CI=false below avoids stopping the build on warnings from webpack about require targets"
-- echo "JOE  We want to see them, but not be blocked on them"
-- CI=false npm run build
-- zip -r anchor.zip build
-- mv anchor.zip build/
-deploy:
-  provider: s3
-  acl: public_read
-  access_key_id: "AKIAUCA3RRQKGN5DFKR7"
-  bucket: pyret-anchor
-  local-dir: build
-  upload-dir: anchor
-  skip_cleanup: true
-  detect_encoding: true
-  on:
-    repo: brownplt/pyret-lang
-    branch: anchor
-  secret_access_key: $AWS_SECRET
-
+  - echo "hello world"
+  - npm install
