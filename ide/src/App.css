@@ -1,0 +1,444 @@
+/*
+This file holds some of the css for the ide. When we first built the ide, all of
+the styling happened in this file. But it was difficult to reason about the look
+of the page when the styling was in a different place from the components it was
+modifying. For this reason, most of the styles on new components happen in their
+own files via style={{ key: value }} in JSX. The only reason we've found to use
+an external file now is for animations with @keyframes, since you can't do that
+with style={{ ... }}.
+ */
+
+html, body, #root {
+    height: 100%;
+    margin: 0;
+    font-family: sans-serif;
+}
+
+.page-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-container {
+    height: 2.7em;
+    background: #c8c8c8;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 10;
+}
+
+.run-container {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    float: right;
+}
+
+.run-options {
+    width: 1.5em;
+    text-align: center;
+    border: none;
+    font-family: sans-serif;
+    font-size: 16px;
+    text-indent: -0.2em;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    background: gray;
+    color: #fff;
+    border-left: 2px solid rgba(0, 0, 0, 0.26);
+}
+
+button::-moz-focus-inner {
+    border: none;
+}
+
+.stop-available {
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.2s;
+    width: 12em;
+    float: right;
+    background: #cf3b31;
+    color: #fff;
+}
+
+.stop-unavailable {
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    width: 12em;
+    float: right;
+    background: none;
+    color: rgba(0, 0, 0, 0.26);
+}
+
+.menu {
+    height: 100%;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    width: 6em;
+    float: left;
+    background: rgba(0,0,0,0.3);
+    color: #fff;
+    border: none;
+}
+
+.run-ready {
+    height: 100%;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    width: 12em;
+    float: right;
+    color: #fff;
+    border: none;
+    background: gray;
+}
+
+.compile-ready {
+    height: 100%;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    width: 12em;
+    float: right;
+    color: #fff;
+    border: none;
+    background: gray;
+    margin-right: 1em;
+}
+
+.run-queued {
+    height: 100%;
+    cursor: pointer;
+    transition: box-shadow 0.2s;
+    width: 12em;
+    float: right;
+    background: none;
+    color: rgba(0, 0, 0, 0.26);
+    border: none;
+    border-right: 2px solid rgba(0, 0, 0, 0.26);
+}
+
+.run-option-disabled {
+    height: 2.7em;
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.2s;
+    width: 100%;
+    background: #c8c8c8;
+    color: rgba(0, 0, 0, 0.26);
+    display: flex;
+    justify-content: flex-start;
+}
+
+.run-option-label {
+    text-align: center;
+    line-height: 3em;
+    font-size: 14px;
+    padding-left: 1em;
+    cursor: pointer;
+    user-select: none;
+}
+
+.run-option-enabled {
+    height: 2.7em;
+    cursor: pointer;
+    border: none;
+    transition: box-shadow 0.2s;
+    width: 100%;
+    background: #317bcf;
+    color: #fff;
+    display: flex;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+.run-option-enabled:focus, .run-option-disabled:focus, .run-ready:focus, .run-queued:focus, .run-options:focus, .stop-available:focus, .stop-unavailable:focus, .menu:focus, .menu-content-button:focus {
+    outline: none;
+}
+
+.interaction-error {
+    background: rgb(255, 202, 202);
+    height: 100%;
+}
+
+.run-option-enabled:hover, .run-ready:hover, .run-options:hover {
+    box-shadow: 0px -5px 10px 5px rgba(0, 0, 0, 0.2);
+    background: #0060ce;
+}
+
+.stop-available:hover {
+    box-shadow: 0px -5px 10px 5px rgba(0, 0, 0, 0.2);
+    background: #b30c00;
+}
+
+.run-option-disabled:hover, .run-queued:hover, .menu:hover, .menu-content-button:hover, .option:hover {
+    background: #979797;
+}
+.fs-browser-item:hover {
+    background: rgba(0,0,0,0.3);
+}
+
+.run-option-checkbox {
+    margin: 0 0 0 1em;
+    margin-top: 1em;
+    padding: 0;
+    float: left;
+    cursor: pointer;
+    width: 1em;
+    height: 1em;
+}
+
+.code-container {
+    height: calc(100% - 5.4em);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.edit-area-container {
+    height: 100%;
+}
+
+.edit-area-container .CodeMirror {
+    height: 100%;
+    border: none;
+}
+
+.splitter-layout {
+    position: relative !important;
+}
+
+.splitter-layout > .layout-splitter {
+    width: 0.5em !important;
+    border: 1px solid #a6a6a6;
+    background: linear-gradient(to right, #bfbfbf 0%, #d9d9d9 40%, #d9d9d9 60%, #bfbfbf 100%);
+}
+
+.splitter-layout.splitter-layout-vertical > .layout-splitter {
+    width: auto !important;
+    height: 0.5em !important;
+    background: linear-gradient(to top, #bfbfbf 0%, #d9d9d9 40%, #d9d9d9 60%, #bfbfbf 100%);
+}
+
+.run-dropdown {
+    position: absolute;
+    right: 10em;
+    top: 2.7em;
+    width: 11.5em;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    border-top: 1px solid rgba(0, 0, 0, 1);
+}
+
+.react-codemirror2 {
+    width: 100%;
+}
+
+.CodeMirror-linenumber {
+    user-select: none;
+}
+
+.interactions-area-container {
+    display: flex;
+    flex-flow: column;
+}
+
+.interactions-area {
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 1em;
+    overflow-y: scroll;
+}
+
+.interaction, .test-result {
+    display: flex;
+    flex-direction: row;
+    padding: 1em;
+    padding-bottom: 0;
+}
+
+.interaction-identifier {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.interaction-error {
+    background: rgb(255, 202, 202);
+}
+
+.menu-content-button {
+    border: none;
+    height: 2.7em;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+}
+
+
+.fs-browser-item, .fs-browser-header {
+    border: none;
+    background: #555;
+    height: 2.7em;
+    color: #fff;
+    text-align: left;
+    flex: none;
+}
+
+.fs-browser-header {
+    border-bottom: 1px solid #eee;
+    background: #555;
+}
+
+.option {
+  border: none;
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+  border: 1px solid darkgray;
+  height: 2.7em;
+}
+
+.table-copy {
+    cursor: pointer;
+    position: absolute;
+    padding: 0.5em;
+    z-index: 1;
+}
+
+.table-container .table-copy {
+    opacity: 0;
+}
+
+.table-container:hover .table-copy {
+    opacity: 1;
+}
+
+.styled-background {
+    background-color: rgb(134, 134, 245);
+}
+
+.styled-background-error {
+    background-color: rgb(255, 202, 202);
+}
+
+.ReactTable {
+    overflow: auto;
+}
+
+.menu-container {
+    display: flex;
+    flex-direction: row;
+    background: #c8c8c8;
+}
+
+.menu-tab-inactive {
+    font-size: 2em;
+    padding: 0.25em;
+}
+
+.menu-tab-active {
+    font-size: 2em;
+    padding: 0.25em;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.menu-content {
+    background: #c8c8c8;
+    height: 100%;
+    width: 16em;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 0px 2px rgba(0, 0, 0, 0.6);
+    position: relative;
+    z-index: 5;
+    overflow-y: scroll;
+}
+
+@keyframes chunk-jiggle {
+  0% {
+    translate: 0px;
+  }
+  33% {
+    translate: 5px;
+  }
+  66% {
+    translate: -5px;
+  }
+  100% {
+    translate: 0px;
+  }
+}
+
+[data-reach-dialog-overlay] {
+  z-index: 100;
+}
+
+/* https://dgreene1.github.io/react-accessible-treeview/docs/examples-Basic */
+.directory {
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  color: white;
+  user-select: none;
+  padding: 20px;
+}
+
+.directory .tree,
+.directory .tree-node,
+.directory .tree-node-group {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.directory .tree-branch-wrapper,
+.directory .tree-node__leaf {
+  outline: none;
+  outline: none;
+}
+
+.directory .tree-node {
+  cursor: pointer;
+}
+
+.directory .tree-node:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.directory .tree .tree-node--focused {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.directory .tree .tree-node--selected {
+  background: rgba(48, 107, 176);
+}
+
+.directory .tree-node__branch {
+  display: block;
+}
+
+.directory .icon {
+  vertical-align: middle;
+  padding-right: 5px;
+}
+  
+.cm-snippet {
+  border: 1px var(--snippet-border) dashed;
+  overflow: hidden;
+  cursor: default;
+  border-top-left-radius: .5em;
+  border-top-right-radius: .5em;
+}
+
+.cm-snippet header {
+  font-size: .7em;
+  background: var(--snippet-header-bg);
+  padding: 0 .5em;
+  box-shadow: 0 0 3px hsla(0, 0%, 0%,.5);
+  z-index: 100;
+  position: relative;
+  border-bottom: 1px var(--snippet-header-border) solid;
+  text-align: right;
+} 
