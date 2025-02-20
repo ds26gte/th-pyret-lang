@@ -7,3 +7,6 @@ script:
   - npm install
   - make
   - npm run web
+  - pwd
+  - cd ide
+  - pwd
