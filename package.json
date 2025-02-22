@@ -71,7 +71,8 @@
     "check-block-tests": "make check-block-tests",
     "ide-tests": "make ide-tests",
     "all-tests": "make all-tests",
-    "typecheck": "make typecheck"
+    "typecheck": "make typecheck",
+    "start": "cd ide && npm start"
   },
   "repository": {
     "type": "git",
