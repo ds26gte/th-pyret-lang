@@ -133,7 +133,7 @@
   },
   "engines": {
     "node": ">=22.5",
-    "npm": ">=11"
+    "npm": ">=10.8"
   },
   "homepage": ".",
   "description": "My webpack project"

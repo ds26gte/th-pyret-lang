@@ -2,8 +2,6 @@ language: node_js
 dist: jammy
 node_js:
 - 22.5.1
-before_install:
-  - npm install -g npm@'>=11'
 script:
 - echo "hello world"
 - npm install
