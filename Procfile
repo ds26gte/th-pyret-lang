@@ -1,1 +1,1 @@
-web: cd ide && npm start 
+web: npm start
