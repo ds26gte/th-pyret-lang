@@ -18,7 +18,7 @@ script:
 - npm install
 - make
 - npm run web
-- cd ide && npm install && cd ..
+- cd ide && npm install && npm run build && cd ..
 deploy:
   provider: heroku
   app: th-pyret-lang
