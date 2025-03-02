@@ -4,15 +4,15 @@ node_js:
 - 22.5.1
 cache:
   directories:
-    - .pyret/compiled
-    - build/phaseA
-    - build/runtime
-    - build/worker
-    - node_modules
-    - src/arr/compiler/ts-*.js
-    - src/runtime-arr/compiled
-    - src/runtime-arr-preludes/compiled
-    - ide/node_modules
+  - ".pyret/compiled"
+  - build/phaseA
+  - build/runtime
+  - build/worker
+  - node_modules
+  - src/arr/compiler/ts-*.js
+  - src/runtime-arr/compiled
+  - src/runtime-arr-preludes/compiled
+  - ide/node_modules
 script:
 - echo "hello world"
 - npm install
@@ -23,7 +23,7 @@ deploy:
   provider: heroku
   app: th-pyret-lang
   api_key:
-    secure: "LFgJ/jpyFLSSxTerQbRFx7o0PRa5scaOZWYWhTtnYAdtKsy8cFko2lJMsolEGxcjYMG2cr4BJT1OFkyMWJCwrXj2i6c8TxqcqtJ0D9KNMx7xikxm9AifFFLPqQQH8PUllrJIIQZjpAAG/1PiEl/KnzeDjmobbkwnUu3ITGDnFjvLSnTOYEWhLDisz1jX+XvojuuWUJAThZzJTHj1MAATuzEMqShmrk9HG4VYX81mwbwctReppwJouzcmhsONfXrg1aSq2u5fOjgieTsaIQjY+lfuknRN75A/anVJwZw1twHscdnYSVE0/eu7Pf7KzPgNnkyoEzRr4lRSwW0DawL0fjBv7AShOKqkItONu3R0TqntcVO/Q+U3AxB6JBhnRbxRjH/7Ylf4wNn8nmgZWiKjyKPqZup8aLYwgoKbIU9sqU16OArndjOvsBVsbExiHzVTsVDlYUz3WIU8cYPsZ71eRYojtuhDsBPMJNOsj3VIxorYmYcX39AimE7BFyOU5hCryD4cdivhXBQxGWsusIbwRQmaxTEUtunVVMddtDZL8TE2LeHDrBOJlQaiTe61UU0CFeFTNQL9DoG+fjA+p6NSiGPMUb4VG0uZQJ9l5Ztf8/8PMoR0kXtvDtDtJKegbNvzdKHGA1cKOKugLG9sq729ejCMp01S72hQ0p8CZbzBzUE="
+    secure: WqCqm+fRwOq+pMDZm0aEJF3Q857ltj1A4fAjW0mhEmXIYxPVUpfqvCQDN+buvEGLloQ0JjrHs2YShb/DgvI1sGZ1IXd2Psudi8BIIUJVv441brklT/eDSIwa/rIrez4YyLWkrYoyunbnQN+QMLbLghLsemVy9eEKNHHIBTyGMA3jG7L0Nj8VLfIG24WAfnawI6oAAbfBSFuHWuRIbNhxQ087gkqhI0TtiCuK3AP5vBT/wxd+rfHOyXuq1uAt5hTFiVCChaOV6AnS08NOqXs0jy6xKDgZ/VDYjFgTiSaKdmrrrB4aNs13RCS7E8fUsXgLezytrVNDbXRr5NcOfRMUhwcH8kYBJ4meIugUsPX+HWOP8iPEua5U+51AlSTkMOHTlxFwvu5EgFlJxQitK0lfZcVkbdtHoovTCFCm8ovWXHloDS/aU4bBMTDfxtBFHf774shIqDywGNi+S4s/OWv+p+70GYT/KG9TJOJLu5xPZLfp6Qseh1/TBkfmnm3TLHlCUcPzl9bbgprqiyPsHkIYcHPNz3jdBP2SVycLh/eTC3xYyxTJ+8P9OeB7bOuFnc31LJL3MkwROQMQ4mabzpNNApELYQ6WzvDFplnuTBe5G5V/RZoecCb2xqZ8Ts6SJFmHZaASVoi9MdloWfXESjszMHMPClYPIiv94N3c87TizPs=
   on:
     all-branches: true
   environment:
