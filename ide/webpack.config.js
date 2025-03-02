@@ -22,8 +22,10 @@ const config = {
         filename: 'static/js/bundle[name].js',
         // There are also additional JS chunk files if you use code splitting.
         chunkFilename: 'static/js/[name].chunk.js',
+        publicPath: '/',
     },
     devServer: {
+      // static: './build',
         open: true,
         host: 'localhost',
     },
