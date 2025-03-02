@@ -72,7 +72,7 @@
     "ide-tests": "make ide-tests",
     "all-tests": "make all-tests",
     "typecheck": "make typecheck",
-    "start": "cd ide && npm start",
+    "start": "cd ide && npm server",
     "heroku-postbuild": "echo build not reqd on heroku"
   },
   "repository": {
