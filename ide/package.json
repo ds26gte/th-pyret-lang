@@ -82,7 +82,7 @@
     "watch": "webpack --watch",
     "serve": "webpack serve",
     "heroku-postbuild": "echo build not reqd inside ide on heroku",
-    "server": "node server.js"
+    "server": "NODE_OPTIONS='--max-old-space-size=512' node server.js"
   },
   "eslintConfig": {
     "extends": "react-app"
