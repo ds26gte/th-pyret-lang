@@ -24,11 +24,17 @@ const config = {
         chunkFilename: 'static/js/[name].chunk.js',
         publicPath: '/',
     },
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
     devServer: {
       // static: './build',
         open: true,
         host: 'localhost',
     },
+    devtool: false,
     plugins: [
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
