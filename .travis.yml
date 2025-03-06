@@ -4,14 +4,6 @@ node_js:
 - 22.5.1
 cache:
   directories:
-  - ".pyret/compiled"
-  - build/phaseA
-  - build/runtime
-  - build/worker
-  - node_modules
-  - src/arr/compiler/ts-*.js
-  - src/runtime-arr/compiled
-  - src/runtime-arr-preludes/compiled
   - ide/node_modules
 script:
 - echo "hello world"
