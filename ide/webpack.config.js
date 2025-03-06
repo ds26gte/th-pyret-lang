@@ -24,15 +24,15 @@ const config = {
         chunkFilename: 'static/js/[name].chunk.js',
         publicPath: '/',
     },
-    optimization: {
-      splitChunks: {
-        chunks: 'all',
-      },
-    },
+    // optimization: {
+    //   splitChunks: {
+    //     chunks: 'all',
+    //   },
+    // },
     devServer: {
-      // static: './build',
-        open: true,
-        host: 'localhost',
+      static: './build',
+        // open: true,
+        // host: 'localhost',
     },
     devtool: false,
     plugins: [
