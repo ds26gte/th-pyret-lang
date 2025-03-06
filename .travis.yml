@@ -11,6 +11,15 @@ script:
 - make
 - npm run web
 - cd ide && npm install && npm run build && cd ..
+before_deploy:
+  - echo ".pyret/compiled" >> .gitignore
+  - echo build/phaseA >> .gitignore
+  - echo build/runtime >> .gitignore
+  - echo build/worker >> .gitignore
+  - echo node_modules >> .gitignore
+  - echo "src/arr/compiler/ts-*.js" >> .gitignore
+  - echo src/runtime-arr/compiled >> .gitignore
+  - echo src/runtime-arr-preludes/compiled >> .gitignore
 deploy:
   provider: heroku
   app: th-pyret-lang
