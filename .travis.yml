@@ -6,7 +6,7 @@ cache:
   directories:
   - ide/node_modules
 script:
-- echo "hello world"
+- echo "hello build start"
 - npm install
 - make
 - npm run web
