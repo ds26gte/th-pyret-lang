@@ -38,45 +38,37 @@ function resultSummary(wheatResultArray: ExamplarResult[], chaffResultArray: Exa
   let chaffMessage = '';
   //
   if (numWheats === 0) {
-    introMessage = 'There are no wheats.';
+    if (numChaffs === 0) {
+      introMessage = `There were no bugs to swat and no butterflies to save.`;
+    } else if (chaffFails === numChaffs) {
+      introMessage = `You swatted all ${numChaffs} bugs but there were no butterflies to save.`;
+    } else { // chaffFails < numChaffs
+      introMessage = `You swatted ${chaffFails} of ${numChaffs} bugs but there were no butterflies to save.`;
+    }
   } else if (wheatFails === 0) {
     if (numChaffs === 0) {
-      introMessage = 'Your tests passed but there are no chaffs.';
-    } else if (chaffSuccs === 0) {
-      introMessage = 'Congratulations! Your tests are correct and comprehensive.';
-    } else {
-      introMessage = 'Your tests are correct but not comprehensive.';
+      introMessage  = `You saved all ${numWheats} butterflies but there were no bugs to swat.`;
+    } else if (chaffFails === numChaffs) {
+      introMessage  = `You saved all ${numWheats} butterflies and swatted all ${numChaffs} bugs.`;
+    } else { // chaffFails < numChaffs
+      introMessage  = `You saved all ${numWheats} butterflies but swatted only ${chaffFails} of ${numChaffs} bugs.`;
     }
-  } else {
-    introMessage = 'Sorry, your tests are incorrect.';
-  }
-  //
-  if (numWheats > 0 && wheatFails === 0 && numChaffs > 0) {
-    // chaffMessage is set only if there's
-    // at least one wheat, no wheat failures, and at least one chaff
-    if (chaffSuccs === 0) {
-      if (numChaffs === 1) {
-        chaffMessage = 'Your test caught the only chaff.';
-      } else {
-        chaffMessage = `Your test caught all ${numChaffs} chaffs.`;
-      }
+  } else { // wheatSuccs < numWheats
+    if (numChaffs === 0) {
+      introMessage  = `You saved only ${wheatSuccs} of ${numWheats} butterflies and there were no bugs to swat.`;
+    } else if (chaffFails === numChaffs) {
+      introMessage  = `You swatted all ${numChaffs} bugs but saved only ${wheatSuccs} of ${numWheats} butterflies .`;
     } else {
-      if (chaffSuccs === numChaffs) {
-        if (numChaffs === 1) {
-          chaffMessage = 'Your didn\'t catch the only chaff.';
-        } else {
-          chaffMessage = `Your didn\'t catch any of the ${numChaffs} chaffs.`;
-        }
-      } else {
-        chaffMessage = `Your tests caught only ${chaffFails} of the ${numChaffs} chaffs.`;
-      }
+      introMessage  = `You swatted only ${chaffFails} of ${numChaffs} bugs and saved only ${wheatSuccs} of ${numWheats} butterflies .`;
     }
   }
   //
   // eslint-disable-next-line
-  if (qtmVariations >= 0) {
-    qtmMessage = `Quartermaster: ${qtmVariations} variants of input/output found. `;
+  /*
+  if (qtmVariations >= 0) { // disable for now
+    qtmMessage = `Quartermaster: found ${qtmVariations} variants of input/output. `;
   }
+  */
   if (introMessage !== '') {
     if (wheatMessage !== '' || chaffMessage !== '' || hintMessage !== '') {
       introMessage += ' ';
