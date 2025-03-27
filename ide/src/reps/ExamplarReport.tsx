@@ -3,6 +3,7 @@ import React from 'react';
 // TODO(joe): is this a bad import to have in the view? Should we have a more intermediate datatype like ChunkResults or no?
 import { CompileAndRunResult } from '../control';
 import { FaBug, FaBugSlash } from "react-icons/fa6";
+import { GiButterfly, GiButterflyWarning } from "react-icons/gi";
 import CodeEmbed from '../CodeEmbed';
 import { CMEditor, parseLocation } from '../utils';
 import { UninitializedEditor } from '../chunk';
@@ -99,8 +100,25 @@ function caughtBug() {
     <FaBugSlash style={{margin: "auto"}} color="#111" size="2em"></FaBugSlash>
   </span>
 }
-function chaffWidget(chaffResults: ExamplarResult[]) {
+
+function savedButterfly() {
+  return <span className="examplar-bug-icon missed">
+    <GiButterfly style={{margin: "auto"}} color="#111" size="2em"></GiButterfly>
+  </span>}
+function hurtButterfly() {
+  return <span className="examplar-bug-icon caught">
+    <GiButterflyWarning style={{margin: "auto"}} color="#111" size="2em"></GiButterflyWarning>
+  </span>
+}
+
+function chaffWheatWidget(chaffResults: ExamplarResult[], wheatResults: ExamplarResult[]) {
   return <div>
+    {
+      wheatResults.map(wr => {
+        if(wr.success) { return savedButterfly(); }
+        return hurtButterfly();
+      })
+    }
     {
       chaffResults.map(cr => {
         if(cr.success) { return missingBug(); }
@@ -155,7 +173,7 @@ export default class ExamplarReportWidget extends React.Component<ExamplarReport
         return <div>{showFirstWheatFailure(wheatResults, hintMessage, editor)}</div>
     }
     return (
-      <div>{chaffWidget(chaffResults)}<p>{resultSummary(wheatResults, chaffResults, hintMessage, qtmVariations)}</p></div>
+      <div>{chaffWheatWidget(chaffResults, wheatResults)}<p>{resultSummary(wheatResults, chaffResults, hintMessage, qtmVariations)}</p></div>
     );
   }
 }
