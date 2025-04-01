@@ -9,6 +9,7 @@ and overriding of rules. */
   --success-green: #27cc78;
   --failure-red: #dc4064;
   --outdated-gray: #ccc;
+  --result-size: 128px;
 }
 
 /* Button style reset */
@@ -458,3 +459,16 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket-region {
 div.directory {
   background: #555;
 }
+
+/* Styles used in the ExamplarEditor */
+.examplar-result-icon {
+  width: var(--result-size); 
+  height: var(--result-size); 
+  background-size: var(--result-size) var(--result-size);
+  display: inline-block;
+}
+
+.bug { background-image: url('img/bug.png'); }
+.bug.swatted { background-image: url('img/bug-swatted.png'); }
+.butterfly { background-image: url('img/butterfly.png'); }
+.butterfly.swatted { background-image: url('img/butterfly-swatted.png'); }

@@ -3,7 +3,6 @@ import React from 'react';
 // TODO(joe): is this a bad import to have in the view? Should we have a more intermediate datatype like ChunkResults or no?
 import { CompileAndRunResult } from '../control';
 import { FaBug, FaBugSlash } from "react-icons/fa6";
-import { GiButterfly, GiButterflyWarning } from "react-icons/gi";
 import CodeEmbed from '../CodeEmbed';
 import { CMEditor, parseLocation } from '../utils';
 import { UninitializedEditor } from '../chunk';
@@ -27,6 +26,15 @@ function resultSummary(wheatResultArray: ExamplarResult[], chaffResultArray: Exa
     const fails = resultArray.filter((result) => !result.success);
     return fails.length;
   }
+
+  function pluralize(noun: string, num: number) {
+    if (noun == "bug") {
+      return num + " " + ((num > 1)? "bugs" : "bug");
+    } else {
+      return num + " " + ((num > 1)? "butterflies" : "butterfly");
+    }
+  }
+
   const numWheats = wheatResultArray.length;
   const numChaffs = chaffResultArray.length;
   const wheatFails = numFailures(wheatResultArray);
@@ -42,25 +50,25 @@ function resultSummary(wheatResultArray: ExamplarResult[], chaffResultArray: Exa
     if (numChaffs === 0) {
       introMessage = `There were no bugs to swat and no butterflies to save.`;
     } else if (chaffFails === numChaffs) {
-      introMessage = `You swatted all ${numChaffs} bugs but there were no butterflies to save.`;
+      introMessage = `You swatted all ${pluralize("bug", numChaffs)}, but there were no butterflies to save.`;
     } else { // chaffFails < numChaffs
-      introMessage = `You swatted ${chaffFails} of ${numChaffs} bugs but there were no butterflies to save.`;
+      introMessage = `You swatted ${chaffFails} of ${pluralize("bug", numChaffs)}, but there were no butterflies to save.`;
     }
   } else if (wheatFails === 0) {
     if (numChaffs === 0) {
-      introMessage  = `You saved all ${numWheats} butterflies but there were no bugs to swat.`;
+      introMessage  = `All ${pluralize("butterfly", numWheats)} made it, but there were no bugs to swat.`;
     } else if (chaffFails === numChaffs) {
-      introMessage  = `You saved all ${numWheats} butterflies and swatted all ${numChaffs} bugs.`;
+      introMessage  = `All ${pluralize("butterfly", numWheats)} made it, and you swatted all ${pluralize("bug", numChaffs)}.`;
     } else { // chaffFails < numChaffs
-      introMessage  = `You saved all ${numWheats} butterflies but swatted only ${chaffFails} of ${numChaffs} bugs.`;
+      introMessage  = `Only ${pluralize("butterfly", numWheats)} made it, and you swatted only ${chaffFails} of ${pluralize("bug", numChaffs)}.`;
     }
   } else { // wheatSuccs < numWheats
     if (numChaffs === 0) {
-      introMessage  = `You saved only ${wheatSuccs} of ${numWheats} butterflies and there were no bugs to swat.`;
+      introMessage  = `Only ${wheatSuccs} of ${numWheats} butterflies made it, and there were no bugs to swat.`;
     } else if (chaffFails === numChaffs) {
-      introMessage  = `You swatted all ${numChaffs} bugs but saved only ${wheatSuccs} of ${numWheats} butterflies .`;
+      introMessage  = `You swatted all ${pluralize("bug", numChaffs)}, but only ${wheatSuccs} of ${pluralize("butterfly", numWheats)} made it.`;
     } else {
-      introMessage  = `You swatted only ${chaffFails} of ${numChaffs} bugs and saved only ${wheatSuccs} of ${numWheats} butterflies .`;
+      introMessage  = `You swatted only ${chaffFails} of ${pluralize("bug", numChaffs)}, and only ${wheatSuccs} of ${pluralize("butterfly", numWheats)} made it.`;
     }
   }
   //
@@ -91,40 +99,25 @@ function resultSummary(wheatResultArray: ExamplarResult[], chaffResultArray: Exa
   return `${qtmMessage}${introMessage}${wheatMessage}${chaffMessage}${hintMessage}`;
 }
 
-function missingBug() {
-  return <span className="examplar-bug-icon missed">
-    <FaBug style={{margin: "auto"}} color="#111" size="2em"></FaBug>
-  </span>}
-function caughtBug() {
-  return <span className="examplar-bug-icon caught">
-    <FaBugSlash style={{margin: "auto"}} color="#111" size="2em"></FaBugSlash>
-  </span>
+function bug() {
+  return <span className="examplar-result-icon bug"></span>
+}
+function swattedBug() {
+  return <span className="examplar-result-icon bug swatted"></span>
 }
 
-function savedButterfly() {
-  return <span className="examplar-bug-icon missed">
-    <GiButterfly style={{margin: "auto"}} color="#111" size="2em"></GiButterfly>
-  </span>}
-function hurtButterfly() {
-  return <span className="examplar-bug-icon caught">
-    <GiButterflyWarning style={{margin: "auto"}} color="#111" size="2em"></GiButterflyWarning>
-  </span>
+function butterfly() {
+  return <span className="examplar-result-icon butterfly"></span>}
+function swattedButterfly() {
+  return <span className="examplar-result-icon butterfly swatted"></span>
 }
 
 function chaffWheatWidget(chaffResults: ExamplarResult[], wheatResults: ExamplarResult[]) {
+  const butterflies = wheatResults.map( wr => wr.success? butterfly() : swattedButterfly() )
+  const bugs        = chaffResults.map( cr => cr.success?    bug()  :   swattedBug()   )
   return <div>
-    {
-      wheatResults.map(wr => {
-        if(wr.success) { return savedButterfly(); }
-        return hurtButterfly();
-      })
-    }
-    {
-      chaffResults.map(cr => {
-        if(cr.success) { return missingBug(); }
-        return caughtBug();
-      })
-    }
+    { butterflies }
+    { bugs }
   </div>
 }
 
